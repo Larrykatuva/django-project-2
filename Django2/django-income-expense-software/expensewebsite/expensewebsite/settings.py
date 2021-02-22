@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'myexpense',
     'authentication',
     'userprefrences',
+    'userincome',
 ]
 
 MIDDLEWARE = [
@@ -133,4 +134,4 @@ EMAIL_HOST_USER = 'testprojects.katuva@gmail.com'   # os.environ.get('EMAIL_HOST
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'testprojects.katuva@gmail.com'  # os.environ.get('EMAIL_HOST_USER')
 EMAIL_PORT = 587
-EMAIL_HOST_PASSWORD = '*****'  # os.environ.get('EMAIL_HOST_PASSWORD')
+EMAIL_HOST_PASSWORD = 'Python@98!'  # os.environ.get('EMAIL_HOST_PASSWORD')

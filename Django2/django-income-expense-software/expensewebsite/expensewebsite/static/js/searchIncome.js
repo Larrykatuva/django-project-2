@@ -13,12 +13,13 @@ searchField.addEventListener("keyup", (e) => {
   if (searchValue.trim().length > 0) {
     paginationContainer.style.display = "none";
     tbody.innerHTML = "";
-    fetch("/search-expenses", {
+    fetch("/income/search-income", {
       body: JSON.stringify({ searchText: searchValue }),
       method: "POST",
     })
       .then((res) => res.json())
       .then((data) => {
+        console.log("data", data);
         appTable.style.display = "none";
         tableOutput.style.display = "block";
 
@@ -27,28 +28,28 @@ searchField.addEventListener("keyup", (e) => {
           tableOutput.style.display = "none";
         } else {
           noResults.style.display = "none";
-          data.forEach((row) => {
+          data.forEach((item) => {
             tbody.innerHTML += `
                 <tr>
-                    <td>${row.amount}</td>
-                    <td>${row.category}</td>
-                    <td>${row.description}</td>
-                    <td>${row.date}</td>
-                    <td>
-                      <a href="edit-expense/${row.id}"
-                      class="btn border border-success text-success btn-sm"
-                      >Edit</a>
-                      <a href="delete-expense/${row.id}"
-                      class="btn border border-danger text-danger btn-sm"
-                      >X</a>
-                    </td>
+                  <td>${item.amount}</td>
+                  <td>${item.source}</td>
+                  <td>${item.description}</td>
+                  <td>${item.date}</td>
+                  <td>
+                    <a href="edit-income/${item.id}"
+                    class="btn border border-success text-success btn-sm"
+                    >Edit</a>
+                    <a href="income-delete/${item.id}"
+                    class="btn border border-danger text-danger btn-sm"
+                    >X</a>
+                  </td>
                 </tr>`;
           });
         }
       });
-    } else {
-        tableOutput.style.display = "none";
-        appTable.style.display = "block";
-        paginationContainer.style.display = "block";
-    }
+  } else {
+    tableOutput.style.display = "none";
+    appTable.style.display = "block";
+    paginationContainer.style.display = "block";
+  }
 });

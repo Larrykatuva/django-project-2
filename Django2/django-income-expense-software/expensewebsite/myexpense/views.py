@@ -1,10 +1,13 @@
-from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import login_required
-from . import models
+import json
+
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.http import JsonResponse
-import json
+from django.shortcuts import render, redirect
+
+from . import models
+from userprefrences.models import UserPreference
 
 
 # Create your views here.
@@ -14,7 +17,10 @@ def index(request):
     paginator = Paginator(expenses, 5)
     page_number = request.GET.get('page')
     page_obj = Paginator.get_page(paginator, page_number)
-    data = {'expenses': expenses, 'page_obj': page_obj}
+    currency = UserPreference.objects.get(user=request.user).currency
+    data = {'expenses': expenses,
+            'page_obj': page_obj,
+            'currency': currency}
     return render(request, 'expenses/index.html', data)
 
 
