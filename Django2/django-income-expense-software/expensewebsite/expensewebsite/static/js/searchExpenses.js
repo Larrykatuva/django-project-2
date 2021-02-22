@@ -35,7 +35,7 @@ searchField.addEventListener("keyup", (e) => {
                     <td>${row.description}</td>
                     <td>${row.date}</td>
                     <td>
-                        <a href="{% url 'edit-expense' ${row.id}  %}"
+                        <a href="edit-expense/${row.id}"
                         class="btn btn-secondary btn-sm"
                         >Edit</a>
                     </td>
